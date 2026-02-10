@@ -464,8 +464,9 @@ class TelegraphAlphabet:
             if ch not in self:
                 continue
             tmp = ch
-            while tmp in seen:
-                tmp = self[(self[tmp].value + 1) % 32].char
+            if tmp in seen:
+                # tmp = self[(self[tmp].value + 1) % 32].char
+                continue
             out.append(tmp)
             seen.add(tmp)
 
