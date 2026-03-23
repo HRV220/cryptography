@@ -199,7 +199,7 @@ def frw_routine_Feistel(BLOCK_IN, KEY_IN):
     Одиночная петля Фейстеля.
  
     :param BLOCK_IN:       открытый текст
-    :param KEY_IN           ключ
+    :param KEY_IN:           ключ
     :return:             шифротекст
     """
     left = BLOCK_IN[0:4]
@@ -214,7 +214,7 @@ def inv_routine_Feistel(BLOCK_IN, KEY_IN):
     Одиночная петля Фейстеля.
  
     :param BLOCK_IN:       шифротекст
-    :param KEY_IN           ключ
+    :param KEY_IN:           ключ
     :return:             открытый текст
     """
     l     = len(BLOCK_IN)
@@ -365,8 +365,8 @@ def inv_inner_Feistel(BLOCK_IN, KEY_IN, r_in):
     Петля фейстеля
  
     :param BLOCK_IN:       шифротекст
-    :param KEY_IN           ключ
-    :param r_in             число раундов
+    :param KEY_IN:           ключ
+    :param r_in:           число раундов
     :return:             открытый текст
     """
     tmp = bit_swap(inv_P_scitala(BLOCK_IN))
@@ -416,7 +416,7 @@ def round_Feistel(BLOCK_IN, KEY_IN):
     Раунд петли Фейстеля
  
     :param BLOCK_IN:       подготовленный к шифрованию текст
-    :param KEY_IN           ключ
+    :param KEY_IN:           ключ
     :return:             почти шифротекст
     """
     left = BLOCK_IN[0:8]
@@ -480,8 +480,8 @@ def frw_Feistel(BLOCK_IN, KEYS_IN, r_in):
     Многораундовое шифрование Фейстеля
  
     :param BLOCK_IN:       открытый текст
-    :param KEY_IN           ключ
-    :param r_in             число раундов не меньше 2
+    :param KEY_IN:           ключ
+    :param r_in:             число раундов не меньше 2
     :return:             шифротекст
     """
     key_set = KEYS_IN
@@ -495,8 +495,8 @@ def inv_Feistel(BLOCK_IN, KEYS_IN, r_in):
     Многораундовое шифрование Фейстеля
  
     :param BLOCK_IN:       шифротекст
-    :param KEY_IN           ключ
-    :param r_in             число раундов не меньше 2
+    :param KEY_IN:           ключ
+    :param r_in:             число раундов не меньше 2
     :return:             открытый текст
     """
     key_set = KEYS_IN
