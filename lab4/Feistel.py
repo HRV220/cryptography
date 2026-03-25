@@ -271,12 +271,14 @@ def block2bin(BLOCK_IN):
     :param BLOCK_IN:       текст
     :return:             массив бит
     """
-    indexes = text2array(BLOCK_IN)
-    bit = [None] * len(BLOCK_IN)
-    for i in range(len(BLOCK_IN)):
-        bit[i] = dec2bin(indexes[i])
-    b = [item for row in bit for item in row]
-    return b
+    # indexes = text2array(BLOCK_IN)
+    # bit = [None] * len(BLOCK_IN)
+    # for i in range(len(BLOCK_IN)):
+    #     bit[i] = dec2bin(indexes[i])
+    # b = [item for row in bit for item in row]
+    # return b
+    num = block2num(BLOCK_IN)
+    return dec2bin(num)
 
 def bin2block(BIN_IN):
     """
@@ -285,12 +287,14 @@ def bin2block(BIN_IN):
     :param BLOCK_IN:       массив бит
     :return:             текст
     """
-    b_new = [BIN_IN[i:i+20] for i in range(0, len(BIN_IN), 20)]
-    nums = [None] * len(b_new)
-    for i in range(len(b_new)):
-        nums[i] = bin2dec(b_new[i])
-    txt = array2text(nums)
-    return txt
+    # b_new = [BIN_IN[i:i+20] for i in range(0, len(BIN_IN), 20)]
+    # nums = [None] * len(b_new)
+    # for i in range(len(b_new)):
+    #     nums[i] = bin2dec(b_new[i])
+    # txt = array2text(nums)
+    # return txt
+    num = bin2dec(BIN_IN)
+    return num2block(num)
 
 def bit_swap(BLOCK_IN):
     """
@@ -300,7 +304,7 @@ def bit_swap(BLOCK_IN):
     :return:             массив бит
     """
     b = block2bin(BLOCK_IN[0:4])
-    for i in range(40):
+    for i in range(10):
         t = b[2 * i]
         b[2 * i] = b[2 * i + 1]
         b[2 * i + 1] = t
@@ -316,7 +320,7 @@ def bit_shift(BLOCK_IN):
     """
     b = block2bin(BLOCK_IN[0:4])
     t = b[19]
-    for i in range(19, 1, -1):
+    for i in range(19, 0, -1):
         b[i] = b[i - 1]
     b[0] = t
     txt = bin2block(b)
@@ -348,8 +352,8 @@ def frw_inner_Feistel(BLOCK_IN, KEY_IN, r_in):
     Петля фейстеля
  
     :param BLOCK_IN:       открытый текст
-    :param KEY_IN           ключ
-    :param r_in             число раундов
+    :param KEY_IN:           ключ
+    :param r_in:             число раундов
     :return:             шифротекст
     """
     tmp = bit_swap(frw_P_scitala(BLOCK_IN))
@@ -507,19 +511,19 @@ def inv_Feistel(BLOCK_IN, KEYS_IN, r_in):
     block = swap_blocks(block)
     return block_xor(block, key_set[0])  
 
-# key  = "МТВ_ВСЕ_ЕЩЕ_ТЛЕН"
-# in1  = "КОРЫСТЬ_СЛОНА_ЭХ"
-# in2  = "НУЖНО_БОЛЬШЕ_ПЫЩ"
+key  = "МТВ_ВСЕ_ЕЩЕ_ТЛЕН"
+in1  = "КОРЫСТЬ_СЛОНА_ЭХ"
+in2  = "НУЖНО_БОЛЬШЕ_ПЫЩ"
 
-# keys = produce_round_keys(key, 6, None)
+keys = produce_round_keys(key, 6, None)
 
-# out1 = frw_Feistel(in1, keys, 1)
-# lout1 = inv_Feistel(out1, keys, 1)
-# out2 = frw_Feistel(in2, keys, 4)
-# lout2 = inv_Feistel(out2, keys, 4)
-# print(keys)
-# print("=" * 20)
-# print(out1)
-# print(lout1)
-# print(out2)
-# print(lout2)
+out1 = frw_Feistel(in1, keys, 1)
+lout1 = inv_Feistel(out1, keys, 1)
+out2 = frw_Feistel(in2, keys, 4)
+lout2 = inv_Feistel(out2, keys, 4)
+print(keys)
+print("=" * 20)
+print(out1)
+print(lout1)
+print(out2)
+print(lout2)
